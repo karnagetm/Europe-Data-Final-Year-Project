@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Data Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #f2f2f2;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .information {
+            margin-top: 60px;
+            max-width: 900px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .graph {
+            flex: 2; /* Adjust this value as necessary */
+            padding: 20px;
+            margin-left: auto;
+        }
+
+        .tableauPlaceholder {
+            width: 100%;
+            height: 900px;
+            position: relative;
+        }
+
+        .hamburger-menu {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .menu-line {
+            width: 30px;
+            height: 3px;
+            background-color: black;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .donut-chart-link {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            z-index: 999;
+            transition: opacity 0.3s;
+        }
+
+        .show {
+            display: block;
+            opacity: 1;
+        }
+
+        @media (max-width: 1068px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .information, .graph {
+                max-width: 100%;
+                flex-basis: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        World Data Dashboard
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
+        <svg class="donut-chart-link" width="100" height="100" viewBox="0 0 42 42">
+            <!-- Create the donut hole -->
+            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="black"></circle>
+            <!-- Create the yellow segment -->
+            <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="yellow" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="100"></circle>
+            <!-- Create the green segment -->
+            <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="green" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="75"></circle>
+            <!-- Create the blue segment -->
+            <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="blue" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="50"></circle>
+            <!-- Create the red segment -->
+            <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="red" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="25"></circle>
+            <!-- Add the ALL text -->
+            <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".3em" font-size="10" >ALL</text>
+        </svg>
+
+
+
+    </div>
+
+    <div class="container">
+        <div class="information">
+            <h2>Information</h2>
+            <p>Welcome to my interactive data visualisation website, which focuses on European trends and patterns in child health. In order to provide you with informative graphic representations of the major health indicators impacting children in this area, I have dug into extensive databases. From illness incidence and healthcare access to vaccination rates and nutritional statuses, my visualisations cover a wide spectrum of data.
+
+               By use of these visual aids, my objective is to provide insight into the present condition of paediatric healthcare in Europe, accentuating advancements in some domains while pinpointing obstacles in others. Each map, chart, and graph has been carefully developed to provide precise, comprehensible, and transparent insights into the many aspects of child health.
+
+               Since my data comes from reputable global data archives, every piece of information I give is current and pertinent. You will have a thorough grasp of the health issues impacting the younger generation in Europe as you work your way through the visualisations, which will provide the groundwork for thoughtful debate, the formulation of public policy, and advocacy initiatives.</p>
+        </div>
+
+        <div class="graph">
+            <h2>Children's Health Graphs</h2>
+            <!-- Immunization, DPT (% of children ages 12-23 months) -->
+            <div class='tableauPlaceholder' id='viz1712605907436'>
+                <noscript><a href='#'><img alt=' ' src='https://public.tableau.com/static/images/wo/world_17126058276380/DiseaseChildrenDPT/1_rss.png' style='border: none' /></a></noscript>
+                <object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='world_17126058276380/DiseaseChildrenDPT' />
+                    <param name='tabs' value='yes' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image' value='https://public.tableau.com/static/images/wo/world_17126058276380/DiseaseChildrenDPT/1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-GB' />
+                </object>
+            </div>
+            <script type='text/javascript'>
+                var divElement = document.getElementById('viz1712605907436');
+                var vizElement = divElement.getElementsByTagName('object')[0];
+                if (divElement.offsetWidth > 900) { vizElement.style.width = '1800px'; vizElement.style.height = '927px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '527px'; }
+                var scriptElement = document.createElement('script');
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            </script>
+            <!-- The embed code for the first Tableau graph will be inserted here -->
+        </div>
+            <!-- Other graphs will follow the same pattern -->
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var chartLink = document.querySelector('.donut-chart-link');
+            chartLink.classList.toggle('show');
+        }
+        document.querySelectorAll('.donut-segment').forEach(function (segment) {
+            segment.addEventListener('click', function () {
+                window.location.href = '/new-page'; // Change this to your actual new page URL
+            });
+        });
+    </script>
+
+    <!-- Tableau graphs JavaScript -->
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1712605907436');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if (divElement.offsetWidth > 900) { vizElement.style.width = '1800px'; vizElement.style.height = '927px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '527px'; }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+
+</body>
+</html>
