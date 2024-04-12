@@ -9,7 +9,6 @@
         :root {
             --primary-color: #4a69bd;
             --text-color: #333;
-           
             --shadow-color: rgba(0,0,0,0.1);
             --shadow-hover-color: rgba(0,0,0,0.2);
             --link-color: #4a69bd;
@@ -69,6 +68,7 @@
                 margin-bottom: 1rem;
                 text-align: justify;
                 line-height: 1.8;
+                font-weight: bold; /* Add this line to make the text bold */
             }
 
             .information strong {
@@ -167,6 +167,7 @@
                 margin: 0 0 20px 0;
             }
         }
+
     </style>
 </head>
 <body>
@@ -179,39 +180,110 @@
             <div class="menu-line"></div>
         </div>
     </div>
-    <svg class="donut-chart-link" width="100" height="100" viewBox="0 0 42 42" onclick="window.location.href='/new-page'">
-        <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#4a69bd"></circle>
-        <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="yellow" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="100"></circle>
-        <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="green" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="75"></circle>
-        <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="blue" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="50"></circle>
-        <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="red" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="25"></circle>
-        <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".3em" font-size="10">ALL</text>
+    <svg class="donut-chart-link" width="100" height="100" viewBox="0 0 42 42">
+        <a xlink:href="demo.html" target="_blank">
+            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#4a69bd"></circle>
+            <circle class="donut-segment yellow-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="yellow" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="100"></circle>
+            <circle class="donut-segment green-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="green" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="75"></circle>
+            <circle class="donut-segment blue-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="blue" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="50"></circle>
+            <circle class="donut-segment red-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="red" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="25"></circle>
+            <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".3em" font-size="10">ALL</text>
     </svg>
+
+    <script>
+        document.querySelector('.yellow-segment').addEventListener('click', function () {
+            window.location.href = 'demo.html';
+        });
+        document.querySelector('.green-segment').addEventListener('click', function () {
+            window.location.href = '/green-page.html';
+        });
+        document.querySelector('.blue-segment').addEventListener('click', function () {
+            window.location.href = '/blue-page.html';
+        });
+        document.querySelector('.red-segment').addEventListener('click', function () {
+            window.location.href = '/red-page.html';
+        });
+    </script>
+
+
+    <div class="information">
+        <h2>INTERACTIVE WORLD MAP</h2>
+        <p>
+            An extensive look at many child health indicators for various nations is offered by this interactive global map visualisation. By modifying the filters located on the right side of the map, viewers have the ability to investigate an array of data points. A variety of indicators are available for selection, including HIV statistics, the frequency of underweight or overweight children, immunisation rates, and anaemia in children. You can narrow down the data to just show data from that year by selecting it, and you can define criteria for the data to be shown by dragging the average value slider. Additionally, you may utilise the country name option to highlight one or more nations for a targeted comparison, or you can click on individual countries to see their unique statistics. With the use of this tool, you may personalise the view to look at and contrast various child health outcomes from across the globe.
+        <p>
+            <div class='tableauPlaceholder' id='viz1712872012936' style='position: relative'>
+                <noscript>
+                    <a href='#'
+                </noscript>
+                <object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='EuropeChildWorldMap/EuropeChildWorldMap' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image' value='https://public.tableau.com/static/images/Eu/EuropeChildWorldMap/EuropeChildWorldMap/1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-GB' />
+                </object>
+            </div>
+            <script type='text/javascript'>
+                var divElement = document.getElementById('viz1712872012936');
+                var vizElement = divElement.getElementsByTagName('object')[0];
+                if (divElement.offsetWidth > 1000) { // This checks if the div width is larger than 800px
+                    vizElement.style.width = '100%';
+                    vizElement.style.height = '960px'; // You can set this to a fixed height if preferred
+                } else {
+                    vizElement.style.width = '100%';
+                    vizElement.style.height = '420px'; // Adjust for smaller screens if necessary
+                }
+                var scriptElement = document.createElement('script');
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            </script>
+
+            <style>
+                .map-title {
+                    text-align: center;
+                    font-size: 24px; /* You can adjust the font size as needed */
+                    font-weight: bold;
+                    margin-top: 20px; /* Adjust the margin as needed */
+                    margin-bottom: 20px; /* Adjust the margin as needed */
+                }
+            </style>
+
     </div>
 
 
-    <div class="graph">
+
+    <div class="information">
         <h2>Children's Health Graphs In Europe</h2>
-        <!-- Immunization, DPT (% of children ages 12-23 months) -->
-        <div class='tableauPlaceholder' id='viz1712605907436' style="width: 100%; height: 700px;">
-            <noscript><a href='#'><img alt=' ' src='https://public.tableau.com/static/images/wo/world_17126058276380/DiseaseChildrenDPT/1_rss.png' style='border: none' /></a></noscript>
-            <object class='tableauViz' style='display:none;'>
-                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                <param name='embed_code_version' value='3' />
-                <param name='site_root' value='' />
-                <param name='name' value='world_17126058276380/DiseaseChildrenDPT' />
-                <param name='tabs' value='yes' />
-                <param name='toolbar' value='yes' />
-                <param name='static_image' value='https://public.tableau.com/static/images/wo/world_17126058276380/DiseaseChildrenDPT/1.png' />
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
-                <param name='language' value='en-GB' />
-            </object>
-        </div>
-        <!-- Additional graphs can be added here -->
+        <p>
+
+
+            <div class='tableauPlaceholder' id='viz1712605907436' style="width: 100%; height: 700px;">
+                <noscript><a href='#'><img alt=' ' src='https://public.tableau.com/static/images/wo/world_17126058276380/DiseaseChildrenDPT/1_rss.png' style='border: none' /></a></noscript>
+                <object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='world_17126058276380/DiseaseChildrenDPT' />
+                    <param name='tabs' value='yes' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image' value='https://public.tableau.com/static/images/wo/world_17126058276380/DiseaseChildrenDPT/1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-GB' />
+                </object>
+            </div>
+            <!-- Additional graphs can be added here -->
     </div>
     </div>
 
@@ -397,9 +469,67 @@
                 Reflecting on these observations, it becomes evident that public health campaigns, political policies, healthcare access and quality, and economic stability significantly influence the likelihood of children receiving ARI treatment. The patterns in the data underscore how public health initiatives and changes in socio-political contexts critically affect children's health outcomes.
             </p>
 
+            <div class="graph">
+                <h2>Graphs Further Analysis</h2>
+                <div class='tableauPlaceholder' id='viz1712856889555' style='position: relative'>
+                    <noscript>
+                        <a href='#'>
+                            <img alt=' ' src='https://public.tableau.com/static/images/wo/worldfurtheranalysis/DiseaseChildrenDPT/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='worldfurtheranalysis/DiseaseChildrenDPT' />
+                        <param name='tabs' value='yes' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/wo/worldfurtheranalysis/DiseaseChildrenDPT/1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-GB' />
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1712856889555');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    if (vizElement) {
+                        vizElement.style.width = '100%';
+                        vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+                        var scriptElement = document.createElement('script');
+                        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                    }
+                </script>
+            </div>
 
+            <h2>Further Analysis</h2>
+            <p>
+                High-income nations: Because of their strong healthcare systems, steady financing, and easy availability to vaccinations, these nations often have stable, high immunisation rates. A decline in these rates may be a sign of problems like supply chain interruptions or vaccination reluctance.
+            <p>
+                Upper-middle-income nations: As their economies expand and their healthcare systems advance, they often see increases in immunisation rates. They could, however, encounter instability as a result of alterations in politics, financial crises, or the financing of healthcare. Lower-middle-income nations: As a result of increased access to healthcare, development initiatives, and foreign help, these nations may see significant advances in the future. However, problems with vaccine delivery and storage or unstable economies may have an impact on rates.
 
+                Low-income nations: The rate of immunisation progresses more slowly in these nations, which may be attributed to a number of issues including poverty, violence, a lack of infrastructure for healthcare, and restricted access to vaccinations. Global health programmes, however, have the potential to eventually provide considerable gains. Unexpected declines in vaccination rates may be related to particular occurrences such as natural catastrophes, conflicts, or economic penalties that cause disruptions to healthcare systems. Consistent rises may be associated with times of political stability, economic expansion, or the effects of international health programmes like the Vaccine Alliance and Gavi.
+                When the majority of the population that can be reached has received vaccinations and the remaining unvaccinated populations are more difficult to reach because of logistical, cultural, or financial obstacles, there may be a ceiling effect or vaccine reluctance.
+                Historical Analysis:
+            <p>
+                Examining the introduction of vaccinations, changes in healthcare policy, the function of foreign assistance, and the impact of significant health campaigns are some examples of historical study topics. Because of the WHO's Expanded Programme on Immunisation, immunisation rates rose in several countries in the late 1970s and early 1980s. Higher coverage rates were probably caused by the introduction of the Hib vaccine in the 1990s and the pneumococcal and rotavirus vaccinations in the 2000s. Economic downturns, like the one that occurred in 2008, may result in lower expenditure on healthcare and have a detrimental effect on vaccination rates. In order to provide a precise analysis, each trend would normally be examined in relation to historical occurrences and changes in policy over certain periods. For extensive and contextual data to assist your study, you may want to check databases like the World Bank's World Development Indicators, UNICEF's data warehouse, or the WHO's Global Health Observatory, depending on your particular needs.
 
+                I often travel across time in my historical studies, sorting through the occasions that influenced these tendencies. The WHO's Expanded Programme on Immunisation, for example, drove a spike in immunisation rates in the late 1970s and early 1980s. The upward contours of these graphs were further filled in by the introduction of vaccines such as the Hib in the 1990s and later pneumococcal and rotavirus vaccines. However, history also reveals darker periods: the 2008 financial crisis, for instance, resulted in a reduction of healthcare budgets, which in turn affected immunisation rates.
+            <p>
+
+                I can observe a drop in anaemia rates when I look at the Prevalence of Anaemia, weight for height (% of children under 5) tables, which may indicate improvements being made globally in the fight against malnutrition and improving access to healthcare. The incidence of anaemia is noticeably lower in high-income nations, most likely due to more stable food systems and access to healthcare. Regarding the middle-class populations, their declining patterns may be consistent with gains in health brought about by efforts to fortify foods or implement dietary treatments.
+
+                With reference to the Prevalence of children (0–14) living with HIV in lower-middle-income countries, the upward trend up to the early 2000s may illustrate the alarming expansion of the HIV pandemic prior to the more widely available treatments such as antiretroviral medications. The subsequent trend of plateauing may show the beneficial effects of these medicines and international health initiatives.
+            <p>
+                The ARI Treatment (% of children under 5 brought to a health provider) data, which show an abrupt drop followed by a rebound for upper-middle-income nations, are very fascinating. This may represent a time when there was a setback in healthcare access, either as a result of legislative changes or economic difficulty, and then a period of recovery.
+
+                It is evident that a variety of causes might have impacted these patterns when I take historical research into account to contextualise these tendencies. Global health programmes, economic policies, and other socio political developments are important. Examining WHO reports or statistics from global health efforts to have a deeper understanding of these nations' historical background may help to explain these differences. These graphs show actual challenges and achievements in public health; they are more than just statistics.
+
+            </p>
 
 
 
@@ -476,3 +606,4 @@
 
 </body>
 </html>
+ 
