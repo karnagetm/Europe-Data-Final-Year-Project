@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Data Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Modern color palette */
+        :root {
+            --primary-color: #800000; /* New primary color Maroon Red */
+            --secondary-color: #F7DC6F; /* Soft Yellow */
+            --accent-color: #A569BD; /* Soft Purple */
+            --background-color: #F4F6F7; /* Light Gray Background */
+            --text-color: #34495E; /* Dark Blue Text */
+            --shadow-color: rgba(0,0,0,0.2);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--primary-color); /* Solid color header */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 32px; /* Increased font size */
+            font-weight: 900;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            justify-content: space-around;
+            gap: 20px; /* Consistent spacing */
+        }
+
+        .information {
+            flex: 1 1 300px; /* Responsive card sizing */
+            background: #fff;
+            border: 1px solid #ddd; /* Subtle borders for definition */
+            box-shadow: 0 6px 12px var(--shadow-color);
+            border-radius: 8px; /* Rounded corners */
+            padding: 20px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            color: var(--text-color);
+            position: relative;
+        }
+
+            .information h2 {
+                font-size: 2rem; /* Increase size for headings */
+                color: var(--primary-color); /* Use the primary color for headings */
+                margin-bottom: 0.75rem;
+                font-weight: 900;
+            }
+
+            .information p {
+                margin-bottom: 1rem;
+                text-align: justify;
+                line-height: 1.8;
+                font-weight: bold; /* Add this line to make the text bold */
+            }
+
+            .information strong {
+                color: var(--primary-color);
+                font-weight: 900; /* Even bolder for strong tags */
+            }
+
+            .information .highlight {
+                background: linear-gradient(to right, rgba(255,255,255,0), rgba(246, 229, 141, 0.4), rgba(255,255,255,0));
+                padding: 10px;
+                border-radius: 5px; /* Rounded corners for the highlight */
+                margin: 10px -20px; /* Extend highlight to the edges */
+                box-shadow: inset 0 0 8px rgba(246, 229, 141, 0.5); /* Inner shadow for depth */
+            }
+
+            .information::before,
+            .information::after {
+                content: '"';
+                font-size: 3rem; /* Large quote marks */
+                color: rgba(0,0,0,0.1); /* Light quote marks */
+                position: absolute;
+            }
+
+            .information::before {
+                top: 10px;
+                left: 10px;
+            }
+
+            .information::after {
+                bottom: 10px;
+                right: 10px;
+            }
+
+        .graph {
+            width: 100%; /* Full-width graphs */
+            margin-bottom: 20px;
+        }
+
+        .tableauPlaceholder {
+            height: auto;
+            position: relative;
+            min-height: 700px; /* Updated min-height for consistency */
+        }
+
+        .hamburger-menu {
+            display: none;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .menu-line {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0;
+            transition: transform 0.2s;
+        }
+
+        .menu-open .menu-line:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-open .menu-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-open .menu-line:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            a:hover {
+                color: var(--link-hover-color);
+                text-decoration: underline;
+            }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .information, .graph {
+                width: 100%;
+                margin: 0 0 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        World Data Dashboard
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
+    </div>
+    <svg class="donut-chart-link" width="100" height="100" viewBox="0 0 42 42">
+        <a xlink:href="demo.html" target="_blank">
+            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#4a69bd"></circle>
+            <circle class="donut-segment yellow-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="yellow" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="100"></circle>
+            <circle class="donut-segment green-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="green" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="75"></circle>
+            <circle class="donut-segment blue-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="blue" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="50"></circle>
+            <circle class="donut-segment red-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="red" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="25"></circle>
+            <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".3em" font-size="10">ALL</text>
+    </svg>
+
+
+
+
+    <div class="information">
+        <h2>MORTALITY INTERACTIVE VISUALISATIONS </h2>
+        <p>
+            This interactive visualization offers a comprehensive exploration of maternal mortality rates across the globe. Leveraging a user-friendly interface, users can analyze the national estimates of maternal mortality per 100,000 live births. The map and accompanying charts provide historical data, allowing for year-by-year analysis and the observation of long-term trends. The detailed filters available enable users to refine the data based on specific criteria, such as geographical region or time period. In addition, the country search option allows for the comparison of maternal health outcomes across different nations. This tool is indispensable for public health professionals, policy makers, and educators who require precise, data-driven insights to understand and address the challenges related to maternal health and survival. Through visual representation, this resource brings attention to the progress made and the disparities that still exist in maternal care worldwide.
+        </p>
+
+        <div class='tableauPlaceholder' id='viz1713116883645' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Mortality Dash 3' src='https://public.tableau.com/static/images/Mo/MortalityDash3/MortalityDash3/1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='MortalityDash3/MortalityDash3' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Mo/MortalityDash3/MortalityDash3/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-GB' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1713116883645');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '2200px';
+                vizElement.style.height = '1227px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '2200px';
+                vizElement.style.height = '1227px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '1027px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+        <style>
+            .map-title {
+                text-align: center;
+                font-size: 24px; /* You can adjust the font size as needed */
+                font-weight: bold;
+                margin-top: 20px; /* Adjust the margin as needed */
+                margin-bottom: 20px; /* Adjust the margin as needed */
+            }
+        </style>
+
+    </div>
+
+    <div class="information">
+        <h2>DISEASE/BATTLE RELATED</h2>
+
+        <div class='tableauPlaceholder' id='viz1713117287930' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Mortality Dash 2' src='https://public.tableau.com/static/images/Mo/Mortalitydash2/MortalityDash2/1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='Mortalitydash2/MortalityDash2' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Mo/Mortalitydash2/MortalityDash2/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-GB' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1713117287930');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '2200px';
+                vizElement.style.height = '1227px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '2200px';
+                vizElement.style.height = '1227px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '1327px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+
+        <div class='tableauPlaceholder' id='viz1713117660136' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Dashboard 4' src='https://public.tableau.com/static/images/Mo/Mortalitydash4/Dashboard4/1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='Mortalitydash4/Dashboard4' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Mo/Mortalitydash4/Dashboard4/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-GB' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1713117660136');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '2200px';
+                vizElement.style.height = '1227px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '2200px';
+                vizElement.style.height = '1227px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '727px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+        <div class='tableauPlaceholder' id='viz1713117947360' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Mortality Dash 1' src='https://public.tableau.com/static/images/Mo/Mortalitydash1/MortalityDash1/1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='Mortalitydash1/MortalityDash1' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Mo/Mortalitydash1/MortalityDash1/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-GB' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1713117947360');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '2200px';
+                vizElement.style.height = '1227px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '2200px';
+                vizElement.style.height = '1227px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '1377px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+
+        <div class="container">
+            <div class="information">
+                <h2>Information/Analysis:</h2>
+                <p>
+                    By looking at this scatter plot, we can see that over time, CO2 emissions from burning gaseous fuels have been going up. This is in line with the trend around the world of using more energy and relying more on fossil fuels. Some countries, like Romania and the Netherlands, are shown a lot, which means they have a lot of emissions compared to the other countries. In terms of history, this rise can be linked to the economic growth that European countries saw after World War II, when industry and home energy use grew by huge amounts. There may be a link between the rise in dots in later years and the energy policies put in place during the oil crisis of the 1970s. During that time, many countries switched from oil to gaseous fuels like natural gas. There aren't many data points for countries like Liechtenstein, which could mean that they don't use much data or that there isn't much of it available. Smaller European countries with less industry or those that are putting money into green technologies may have lower pollution. To get a full picture, one would have to look at how the economy, government, and technology have changed over time. The changes in the energy sector caused by the oil crashes of the 1970s, the Kyoto Protocol in 1997, and the more recent Paris Agreement will have an effect on the trends shown here. Trends in CO2 pollution would also be affected by national policies that encourage people to use less energy, switch to green energy sources, and change how industries work. This picture shows how growth, energy use, and environmental effects are all connected in a complicated way. It also shows how important it is to look at the past to understand how emissions have changed over time and how well policies have worked at lowering the carbon footprint. The "CO2 Emissions from Liquid Fuel Consumption" stacked area chart shows how CO2 emissions from liquid fuels like petrol, diesel and oil have changed over time. By looking at the layers, we can figure out that countries with large industry bases, large car fleets, and high levels of economic activity have been the main sources of pollution over the years. It is worth noting that emissions rise during times of economic growth. This is because businesses and transportation use more energy during those times.
+                <p>
+                <p>
+                    For example, many European countries had fast industrial growth during the economic boom that followed World War II. This is likely what the rising trends in the figure from the 1950s to the late 20th century mean. In the 1970s, especially the 1973 oil crisis, there were oil shocks that caused costs to rise and demand to temporarily slow down. This is likely what caused the short period of stability seen in the data. This is an example of how well the chart can show how global events have affected the economy and the environment. On the other hand, the trend may have flattened and eventually gone down in the early 21st century because of a number of things, such as the 2008 financial crisis, greater environmental knowledge, and policy changes like the approval of the Kyoto Protocol. Because people are worried about climate change, this turning point could also mean a move towards cleaner fuels and green energy sources. The different coloured levels on the picture show how much energy each country uses, which is affected by its economic policies, new technologies, and the resources it has access to. So, the visualisation not only keeps track of how energy was used in the past, but it also makes people and policymakers think about how important it is to use energy in a way that doesn't harm the environment.
+                <p>
+                    CO2 released when burning fuel is burned It's possible that this bubble chart shows how CO2 pollution from gaseous sources like natural gas have changed over time in different countries. It's possible that bigger bubbles mean more pollution. It's possible that countries that use or produce a lot of natural gas would have bigger or more frequent bubbles. Changes in energy policy, the growth of industry, or the move towards cleaner energy sources could all have an effect on the historical trends in this data. Emissions of CO2 from using liquid fuel Visualisation Analysis: The total amount of CO2 released from liquid fuels, like oil products, in different countries could be shown on a stacked area chart. The areas that are going up and down could be caused by economic booms and busts, the effects of oil crises, the use of more efficient technologies, or the enforcement of environmental laws. CO2 emissions from burning solid fuels Analysis of Visualisation: It would be helpful to see how pollution from solid fuels, like coal, have changed over time with a line graph. Sharp rises or falls in some lines could be related to past events like the use of tools to control emissions, the opening or closing of coal mines, or changes in the economy as a whole.
+                <p>
+                    CO2 Emissions From Making Electricity and Heat: A Visualisation and Analysis This stacked area chart might show how much CO2 is released when energy and heat are made. These emissions may be rising quickly because more people are moving to cities and needing more power and heat. On the other hand, they may be levelling off or going down because people are using less energy, switching to green sources, or factories closing down.CO2 Emissions from Transportation (as a percentage of all fuel burned) Analysis of Visualisation: This line graph might show how much CO2 is released by the transportation industry, which could include land, air, and sea travel. Trends might show how transportation infrastructure is growing, how fuel-efficient vehicles are changing, how the economy is affecting trade and travel, or how we are switching to less damaging transportation technologies. Nitric oxide and methane emissions from farms (%) and methane emissions from farms (%) Analysis of Visualisation: These bar charts could show how agriculture affects greenhouse gas pollution. For example, nitrous oxide is a result of how land is managed, and methane is mostly made by cattle. Differences over time could be caused by changes in farming methods, the use of new farming tools, new ways of managing animals, or new rules meant to lower emissions from farming. In all of these cases, past study would look into how changes in society, the economy, technology, and government policies affected these emissions trends. This might also have something to do with how foreign deals like the Paris Agreement or the Kyoto Protocol work. To get a better sense of these trends in a bigger picture, the data could be compared to records of past energy use, GDP growth, industry output, and agriculture production. Each visualisation shows a small part of the complicated, interconnected factors that affect the environment and helps us understand how hard it is to control CO2 emissions on a global scale. CO2 Emissions from Gaseous Fuel Consumption: The graph of "CO2 Emissions from Gaseous Fuel Consumption" probably shows how much CO2 fuels like natural gas put into the air over time in different countries. Each data point, which could be shown by a bubble, shows a country's annual emissions, and the size of the point shows how much emissions there are. A rising line in the data set could mean that the world is using more gaseous fuels, which is often a sign of economic growth and a higher need for energy. This rise could be especially high when the economy is doing well and not so high when the economy is doing badly or when there is a move towards green energy sources.
+                <p>
+                    CO2 Emissions from Liquid Fuel Consumption: for "CO2 Emissions from Liquid Fuel Consumption," a stacked area map might suit your needs. Usually, this kind of chart would show the overall emissions from liquid fuels by putting the emissions from each country on top of the others. Each section would have a different colour or design to show which country it belongs to, and the total height of the stacked areas at any given time would show the world's total emissions. The trends seen might be related to things that happened in the past, like the rise in car use, the use of liquid fuels in industry, and changes in world policy that favour innovations that use less fuel. A sharp rise could be linked to times when factories started to grow, while drops or plateaus could be linked to big oil crises, economic downturns, or the start of alternative energy projects. CO2 Emissions from Solid Fuel Consumption: A chart called "CO2 Emissions from Solid Fuel Consumption," which is most likely a line graph, shows how CO2 emissions change over time when solid fuels like coal and wood are burned. Each line could show a country's pollution over time, showing how manufacturing methods and energy use have changed over time. A general drop in some countries could mean that they are switching from coal to better energy sources, while lines that stay the same or go up could mean that they are still relying on solid fuels. Historical events like the passing of clean air acts, the closing of coal mines, or investments in coal-fired power plants would have a big effect on these trends.
+                <p>
+                    The picture displayed The graph called "Agricultural Methane Emission (% percentage)" looks like a bar chart that shows how much methane is released by farming in different countries. This kind of graph can show how emissions vary a lot from one country to the next. This is probably because farming methods, the size of animal farms, and the use of farming technology are all different. Bars that go further along the horizontal line may show countries with bigger agricultural sectors or that depend a lot on raising livestock, which is a major source of methane because ruminants produce it when their guts ferment.
+                <p>
+                    The history of these pollutants can be connected to changes in eating habits, the Green Revolution, and how farming methods have changed over time. For example, the rise in meat consumption around the world may have caused methane emissions to rise, especially in places where industrial cattle farming is growing. Putting in place methods to lower methane levels, like better waste management and changing the food that animals eat, may also help to see drops or stays the same in some areas. This graphic is an important part of knowing how agriculture affects the environment and stresses the need for environmentally friendly farming methods to slow down climate change.
+            </div>
+        </div>
+
+
+
+        <script>
+            function toggleMenu() {
+                var chartLink = document.querySelector('.donut-chart-link');
+                chartLink.classList.toggle('show');
+            }
+
+            document.querySelector('.yellow-segment').addEventListener('click', function () {
+                window.location.href = 'demo.hmtl';
+            });
+            document.querySelector('.green-segment').addEventListener('click', function () {
+                window.location.href = 'Emission.html';
+            });
+            document.querySelector('.blue-segment').addEventListener('click', function () {
+                window.location.href = 'Childrens Health.html';
+            });
+            document.querySelector('.red-segment').addEventListener('click', function () {
+                window.location.href = 'Mortality.html';
+            });
+        </script>
+
+        <!-- Tableau graphs JavaScript -->
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1712605907436');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+
+            // Set up a function to run whenever the window resizes to adjust the viz size
+            function resizeViz() {
+                if (divElement.offsetWidth > 900) {
+                    vizElement.style.width = '100%';
+                    vizElement.style.height = '1000px'; // Set this to the height that accommodates your full graph
+                } else {
+                    vizElement.style.width = '100%';
+                    vizElement.style.height = '1000px'; // Set this for smaller screens as well
+                }
+            }
+
+            // Call this function initially and every time the window resizes
+            window.onload = resizeViz;
+            window.onresize = resizeViz;
+
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+        <script>
+            // Simple script for hamburger menu animation
+            document.querySelector('.hamburger-menu').addEventListener('click', function () {
+                this.classList.toggle('menu-open');
+            });
+        </script>
+
+</body>
+</html>
