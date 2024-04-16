@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Data Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Modern color palette */
+        :root {
+            --primary-color: #E6B800; /* Gold Yellow */
+            --secondary-color: #F7DC6F; /* Soft Yellow */
+            --accent-color: #A569BD; /* Soft Purple */
+            --background-color: #F4F6F7; /* Light Gray Background */
+            --text-color: #34495E; /* Dark Blue Text */
+            --shadow-color: rgba(0,0,0,0.2);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--primary-color); /* Solid color header */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 32px; /* Increased font size */
+            font-weight: 900;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            justify-content: space-around;
+            gap: 20px; /* Consistent spacing */
+        }
+
+        .information {
+            flex: 1 1 300px; /* Responsive card sizing */
+            background: #fff;
+            border: 1px solid #ddd; /* Subtle borders for definition */
+            box-shadow: 0 6px 12px var(--shadow-color);
+            border-radius: 8px; /* Rounded corners */
+            padding: 20px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            color: var(--text-color);
+            position: relative;
+        }
+
+            .information h2 {
+                font-size: 2rem; /* Increase size for headings */
+                color: var(--primary-color); /* Use the primary color for headings */
+                margin-bottom: 0.75rem;
+                font-weight: 900;
+            }
+
+            .information p {
+                margin-bottom: 1rem;
+                text-align: justify;
+                line-height: 1.8;
+                font-weight: bold; /* Add this line to make the text bold */
+            }
+
+            .information strong {
+                color: var(--primary-color);
+                font-weight: 900; /* Even bolder for strong tags */
+            }
+
+            .information .highlight {
+                background: linear-gradient(to right, rgba(255,255,255,0), rgba(246, 229, 141, 0.4), rgba(255,255,255,0));
+                padding: 10px;
+                border-radius: 5px; /* Rounded corners for the highlight */
+                margin: 10px -20px; /* Extend highlight to the edges */
+                box-shadow: inset 0 0 8px rgba(246, 229, 141, 0.5); /* Inner shadow for depth */
+            }
+
+            .information::before,
+            .information::after {
+                content: '"';
+                font-size: 3rem; /* Large quote marks */
+                color: rgba(0,0,0,0.1); /* Light quote marks */
+                position: absolute;
+            }
+
+            .information::before {
+                top: 10px;
+                left: 10px;
+            }
+
+            .information::after {
+                bottom: 10px;
+                right: 10px;
+            }
+
+        .graph {
+            width: 100%; /* Full-width graphs */
+            margin-bottom: 20px;
+        }
+
+        .tableauPlaceholder {
+            height: auto;
+            position: relative;
+            min-height: 700px; /* Updated min-height for consistency */
+        }
+
+        .hamburger-menu {
+            display: none;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .menu-line {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0;
+            transition: transform 0.2s;
+        }
+
+        .menu-open .menu-line:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-open .menu-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-open .menu-line:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            a:hover {
+                color: var(--link-hover-color);
+                text-decoration: underline;
+            }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .information, .graph {
+                width: 100%;
+                margin: 0 0 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        EUROPE DATA DASHBOARD
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
+    </div>
+    <svg class="donut-chart-link" width="100" height="100" viewBox="0 0 42 42">
+        <a xlink:href="demo.html" target="_blank">
+            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#4a69bd"></circle>
+            <circle class="donut-segment yellow-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="yellow" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="100"></circle>
+            <circle class="donut-segment green-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="green" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="75"></circle>
+            <circle class="donut-segment blue-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="blue" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="50"></circle>
+            <circle class="donut-segment red-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="red" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="25"></circle>
+            <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".3em" font-size="10">ALL</text>
+    </svg>
+
+
+
+
+    <div class="information">
+        <h2> EUROPE'S MERCHANDISE</h2>
+        <p>
+            Greetings and welcome to our interactive platform, where we will explore the rich history of European goods trade. We explore how Europe has interacted with economies worldwide through a carefully chosen series of visualisations that take us from the bustling markets of the Arab world to the dynamic shores of South Asia, the vibrant hubs of East Asia & Pacific, and the emerging landscapes of Sub-Saharan Africa. Our journey takes us across time and geography.
+
+            We urge you to investigate the ebbs and flows of trade ties via each of the painstakingly detailed visualisations on our site. Our bubble charts and scatter plots come to life with vibrant colours and sizes that tell the tale of trade volume, economic development, and the shifting fortunes of countries over time. These visual tales are more than simply statistics; they represent the beating heart of trade and history, which have moulded the world we live in.
+
+            The line graphs, which show trade's percentage of GDP, highlight the importance of trade in the framework of national economies. You may learn more about a country's long-term economic resilience and vitality by using this macroeconomic perspective. Observe how economic ups and downs, booms, and recoveries leave their lasting impressions on these lines.
+
+            Our bar graphs demonstrate how Europe has extended out across seas to trade with far-off countries and provide a comparative look at the continent's trading activities outside its immediate neighbours. This demonstrates the spirit of enterprise and interdependence that characterise Europe's position in the world economy.
+
+        </p>
+
+        <div class='tableauPlaceholder' id='viz1713151471257' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Arab Import/Export' src='https://public.tableau.com/static/images/Ar/ArabMerchDashboard/ArabImportExport/1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='ArabMerchDashboard/ArabImportExport' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Ar/ArabMerchDashboard/ArabImportExport/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-GB' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1713151471257');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '2300px';
+                vizElement.style.height = '1227px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '2300px';
+                vizElement.style.height = '1227px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '1727px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+
+        <style>
+            .map-title {
+                text-align: center;
+                font-size: 24px; /* You can adjust the font size as needed */
+                font-weight: bold;
+                margin-top: 20px; /* Adjust the margin as needed */
+                margin-bottom: 20px; /* Adjust the margin as needed */
+            }
+        </style>
+
+        <p>
+            Observing these visual aids, I perceive a narrative developing on the changing dynamics between European nations and the Arab world. The goods import bubble charts present a heterogeneous picture, with France, Italy, and Spain appearing as key partners. The varying sizes of these bubbles over time indicate a rise in trade volumes, pointing to a tightening economic tie that is probably the consequence of strategic trade agreements and the integration of the world economy. European imports from the Arab world: The upward trend in European imports from the Arab World may be a sign of the continent's expanding energy requirements, particularly in the aftermath of the 1970s oil crisis. Global energy dynamics significantly changed during this time, especially after the 1973 oil embargo, with European nations becoming more and more dependent on Arab countries for its oil. Furthermore, the introduction of the single market by the European Union in the 1990s could have made commerce between its member states simpler, which would have increased the amount of imports.
+
+            Exports from Europe to the Arab World: On the other hand, the increase in European exports to the Arab World throughout time may be attributed to the modernization and rebuilding efforts in many Arab nations, especially those that followed the 1990s. Demand for European industrial products and services was strong as these countries looked to expand their economies beyond oil. Furthermore, given that political instability may have an impact on commercial connections, the Arab Spring events of 2011 could have caused temporary swings in trade. Trade with Developing Economies in Sub-Saharan Africa, East Asia & Pacific, and South Asia: The late 20th century growth of the "Asian Tigers" (Hong Kong, Singapore, South Korea, and Taiwan), China's entry into the World Trade Organisation in 2001, and India's economic liberalisation policies in 1991 all probably played a role in the region's increased trade volumes as manufacturing powerhouses. The rise in Sub-Saharan Africa may be related to European development and assistance programmes, such as the 2000 Cotonou Agreement, which promoted commerce with nations in the African, Caribbean, and Pacific regions.
+
+            goods Trade as a Whole: The overall rise in goods trade throughout the years as a proportion of GDP is probably indicative of the larger globalisation trend. Reducing trade obstacles and promoting cross-border business, the World Trade Organization's establishment in 1995 and the next rounds of international trade talks may have had a role in this growth. In conclusion, the story of a globe becoming increasingly interconnected via commerce is captured by these visuals. The fluctuations may be linked to important geopolitical occurrences, changes in policies, and worldwide economic transformations. These figures illustrate the interdependence of our global economy and weave them into the story of the planet.
+        <p>
+
+    </div>
+
+    <div class="information">
+        <h2>SOUTH/EAST ASIA & PACIFIC</h2>
+
+        <div class='tableauPlaceholder' id='viz1713153216483' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='South/East Asia & Pacific Import/Export' src='https://public.tableau.com/static/images/So/SouthEastAsiaPacificMerchDash/SouthEastAsiaPaciificImportExport/1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='SouthEastAsiaPacificMerchDash/SouthEastAsiaPaciificImportExport' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/So/SouthEastAsiaPacificMerchDash/SouthEastAsiaPaciificImportExport/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-GB' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1713153216483');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '2300px';
+                vizElement.style.height = '1227px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '2300px';
+                vizElement.style.height = '1227px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '1827px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+        <p>
+            Welcome to our investigation on the patterns of European commerce with emerging nations. We take a trip through time with these visualisations, following the flow of trade currents from the thriving economies of East Asia and South Asia to the healthy markets of Europe. Our line charts reveal a dynamic trading environment, starting with South Asia. The region's remarkable ups and downs may be a reflection of the market liberalisation and economic changes that started in the late 20th century, particularly in India. The goal of these adjustments was to further integrate the economies of South Asia into the world market; the results may be seen in the increasing import and export values over time.Luxembourg is shown to be a fairly important hub in the bubble charts for imports from East Asia and the Pacific. This is probably due to Luxembourg's welcoming investment environment and its clever use of capital to forge a robust logistics system that increases its import capability.
+
+            As a result of the "East Asian Miracle," which saw nations like China, South Korea, and others achieve rapid industrial expansion, exports have increased significantly over time. The rising trend of exports to these areas indicates that Europe, with its sophisticated technology and money, has been a crucial partner in this progress, contributing equipment and investment.The remarkable success of Romania's exports to both areas is especially interesting. This may be explained by its industrial sector's competitiveness and its improved access to Asian markets after the EU membership.
+        <p>
+
+        
+    <h2>SUB-SAHARAN AFRICA/TRADE</h2>
+    <div class='tableauPlaceholder' id='viz1713153420071' style='position: relative'>
+        <noscript>
+            <a href='#'>
+                <img alt='Sub-Saharan Africa Import/Export' src='https://public.tableau.com/static/images/Su/Sub-SaharanAfricaMerchDash/Sub-SaharanAfricaImportExport/1_rss.png' style='border: none' />
+            </a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='Sub-SaharanAfricaMerchDash/Sub-SaharanAfricaImportExport' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/Su/Sub-SaharanAfricaMerchDash/Sub-SaharanAfricaImportExport/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-GB' />
+        </object>
+    </div>
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1713153420071');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if (divElement.offsetWidth > 800) {
+            vizElement.style.width = '2300px';
+            vizElement.style.height = '1227px';
+        } else if (divElement.offsetWidth > 500) {
+            vizElement.style.width = '2300px';
+            vizElement.style.height = '1227px';
+        } else {
+            vizElement.style.width = '100%';
+            vizElement.style.height = '1377px';
+        }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+
+    <p>
+        Portugal has historically high percentages in the bubble plots of imports from Sub-Saharan Africa to European nations. This is not just a coincidence; it is a result of linguistic and colonial legacies that have strengthened commercial links long into the twenty-first century. Historical occurrences such as the Carnation Revolution of 1974, which brought an end to Portugal's autocratic government, and its entry into the European Economic Community in 1986 created new opportunities for investment and trade as Portugal worked to reestablish equitable and mutually beneficial relationships with its former colonies.A similar story is told by the export graph, which continually shows Portugal at the top. This may be related to investments made in Portuguese-speaking African nations in industries like banking and energy. The global commodities boom that saw a jump in demand for raw materials—many of which are rich in Africa—is reflected in the higher export numbers around the end of the 20th and beginning of the 21st centuries.
+
+        When one zooms out to the larger picture of the economy, the merchandise trade as a proportion of GDP provides more context. The commodities supercycle, the ease of capital movements at that time, and the apex of globalisation might all be contributing factors to the startling rise in trade's GDP share in the 2000s. The fact that this development is not consistent across all nations, however, suggests that different economic strategies, resource endowments, and industrial capabilities exist.Early in the new millennium, trade volume increased in tandem with China's admission to the World Trade Organisation (WTO) in 2001, which spurred trade links between Africa and non-traditional Western partners to expand. Furthermore, the 2008 financial crisis is probably to blame for the subsequent oscillations, since decreased global demand and falling commodity prices had a significant effect on trade dynamics.
+    <p>
+
+        <h2>OUTSIDE REGION</h2>
+        <div class='tableauPlaceholder' id='viz1713153522328' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Outside Import/Export' src='https://public.tableau.com/static/images/Ou/OutsideMerchDash/OutsideImportExport/1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='OutsideMerchDash/OutsideImportExport' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Ou/OutsideMerchDash/OutsideImportExport/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-GB' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1713153522328');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '2300px';
+                vizElement.style.height = '1227px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '2300px';
+                vizElement.style.height = '1227px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '977px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+    <p>
+        Upon analysing the trade connections shown in these illustrations, I am reminded of the complex network of economic interdependencies that shape our world. When one focuses on goods coming into and going out of emerging economies outside of the immediate area of Europe, one can see that the wave of globalisation has certainly reached every beach. The remarkable stability of imports in nations like France and Germany points to a steady demand for goods from other areas, highlighting the broad import portfolios and strong consuming capacity of these economies. Conversely, the disparities in import levels across the various European nations draw attention to the subtleties of economic scale, consumption trends, and maybe the strategic importance of certain trade agreements.
+
+        Turning now to exports, it is striking how many countries are now able to access emerging economies. Nations like Portugal and the United Kingdom that have a long history of colonisation and maritime commerce have the resources and incentive to sustain and grow their trading networks. Subtle gains in exports from post-EU nations such as Latvia and Lithuania demonstrate how a country's export potential may be increased by incorporation into a bigger economic union. When historical events are superimposed on this data, it becomes clear that the early 1990s collapse of the Soviet Union, the following shift of Eastern Europe to market economies, and the EU's expansion in the 2000s have all contributed to the reconfiguration of these trade flows. More recently, as nations reevaluate their economic plans, the 2008 financial crisis and the current retreat from globalisation may account for the stabilisation or fall in certain trade activity.
+    <p>
+
+        <h2>WITHIN REGION</h2>
+        <div class='tableauPlaceholder' id='viz1713153542170' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Within region import/export' src='https://public.tableau.com/static/images/Wi/WithinRegionMerchDash/Withinregionimportexport/1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='WithinRegionMerchDash/Withinregionimportexport' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Wi/WithinRegionMerchDash/Withinregionimportexport/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-GB' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1713153542170');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '2300px';
+                vizElement.style.height = '1227px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '2300px';
+                vizElement.style.height = '1227px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '977px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+    <p>
+        Upon closer inspection of the import picture, I see a trend of rising import activity over time, with certain nations—such as Moldova and Ukraine—frequently displaying bigger bubbles. This could point to their expanding marketplaces or perhaps their key positions as the region's transportation centres. The variety of colours that stand for the many nations highlights how these countries are not simply isolated units but rather are a part of a wider, interdependent economic structure. It also depicts a varied but linked commerce network. Now let's look at the export graphic, which shows how different countries are interacting with their neighbours based on the distribution of export activity. It's fascinating to observe the times of notable export quantities, which may coincide with successful industries, important agricultural export harvest seasons, or local economic booms. Taking into account the historical background, I can think of a number of reasons that might have an impact on these trends, such as regional trade agreements, economic reforms, and infrastructure building programmes. The state of politics may also have a significant effect on commerce. While political unrest might cause a contraction in commerce, a tranquil era can promote growth in it.
+    <p>
+
+
+        <script>
+            function toggleMenu() {
+                var chartLink = document.querySelector('.donut-chart-link');
+                chartLink.classList.toggle('show');
+            }
+
+            document.querySelector('.yellow-segment').addEventListener('click', function () {
+                window.location.href = 'Merchandise.html';
+            });
+            document.querySelector('.green-segment').addEventListener('click', function () {
+                window.location.href = 'Emission.html';
+            });
+            document.querySelector('.blue-segment').addEventListener('click', function () {
+                window.location.href = 'Childrens Health.html';
+            });
+            document.querySelector('.red-segment').addEventListener('click', function () {
+                window.location.href = 'Mortality.html';
+            });
+        </script>
+
+        <!-- Tableau graphs JavaScript -->
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1712605907436');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+
+            // Set up a function to run whenever the window resizes to adjust the viz size
+            function resizeViz() {
+                if (divElement.offsetWidth > 900) {
+                    vizElement.style.width = '100%';
+                    vizElement.style.height = '1000px'; // Set this to the height that accommodates your full graph
+                } else {
+                    vizElement.style.width = '100%';
+                    vizElement.style.height = '1000px'; // Set this for smaller screens as well
+                }
+            }
+
+            // Call this function initially and every time the window resizes
+            window.onload = resizeViz;
+            window.onresize = resizeViz;
+
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+        <script>
+            // Simple script for hamburger menu animation
+            document.querySelector('.hamburger-menu').addEventListener('click', function () {
+                this.classList.toggle('menu-open');
+            });
+        </script>
+
+</body>
+</html>
