@@ -18,7 +18,7 @@ My final year project presents an extensive, interactive investigation into vari
 
 ## Getting Started
 Clone the repo to view the project locally:
-git clone https://github.com/karnagetm/World-Data-FYP.git
+git clone https://github.com/karnagetm/Europe-Data-FYP.git
 
 ## Installation
 1. Clone the repository.
