@@ -1,53 +1,44 @@
-# Comprehensive Data Visualizations on European Metrics
+# Final Year Project: European Data Exploration
 
 ## Overview
-This repository is dedicated to providing a multi-faceted view of Europe through interactive data visualizations. It encompasses a range of topics including children's health, environmental emissions, mortality rates, economic trade, and a detailed analysis workbook. Each HTML file corresponds to a specific category, offering a deep dive into the respective subject matter using Tableau-powered visual tools.
+My final year project presents an extensive, interactive investigation into various metrics of European life. Spanning health, environment, mortality, and trade, the visualizations on this website illuminate trends and provide a basis for informed discussions on public policy.
 
 ## Content
-- `Childrens Health.html`: Interactive insights into child health metrics across European nations.
-- `Citation.html`: Documentation of data sources and citations used across visualizations.
-- `Emission.html`: Exploration of European emissions data highlighting environmental impacts.
-- `Merchandise.html`: Analysis of merchandise trade flows within and outside Europe.
-- `Mortality.html`: Visual representation of mortality rates to understand health trends in Europe.
-- `world further analysis.twb`: A Tableau workbook for advanced analysis of the datasets.
-- `world.twb`: The main Tableau workbook which integrates various datasets for a comprehensive view.
-
+- `Childrens Health.html`: Delve into the child health indicators across Europe.
+- `Citation.html`: Lists references and data sources used in the visualizations.
+- `Emission.html`: Examine the impact of environmental emissions in Europe.
+- `Merchandise.html`: Understand trade flows and economic exchanges.
+- `Mortality.html`: Study mortality rate trends for health insight.
+- `world further analysis.twb` & `world.twb`: Tableau workbooks for in-depth data analysis. For full access, email Karnagetm@gmail.com.
 - Cannot fit all Tableau Workbooks on here, email Karnagetm@gmail.com for all Tableau Workbooks
-
+  
 ## Technologies
-- HTML & CSS for web page structure and styling.
-- Tableau for creating and embedding interactive visualizations.
+- HTML & CSS: Structure and design of the website.
+- Tableau: Data visualization and interactive analysis tools.
 
 ## Getting Started
-To get a local copy up and running, follow these simple steps:
-Clone the repo:
-
+Clone the repo to view the project locally:
 git clone https://github.com/karnagetm/World-Data-FYP.git
 
 ## Installation
-To run this project locally:
-1. Clone this repository:
-
-2. Navigate to the directory and open any `.html` file in a web browser to interact with the visualizations.
-3. For Tableau workbooks, you will need Tableau Desktop or Reader to open `.twb` files.
+1. Clone the repository.
+2. Open `.html` files in a browser to interact with the visualizations.
+3. Open `.twb` files with Tableau Desktop or Reader for further analysis.
 
 ## How to Use
-- Choose an HTML file corresponding to the data set you are interested in exploring.
-- Use the Tableau interactive features such as filters and drill-down capabilities to customize the view and glean insights.
-  
+- Select an HTML file to explore the associated dataset.
+- Utilize Tableau's interactive elements for personalized insights.
+
 ## License
-This project is licensed under the MIT License - see the `LICENSE` file for details.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Acknowledgements
-- This project utilizes data from reputable sources such as the World Health Organization, the European Environment Agency, and Eurostat.
-- Special thanks to all the contributors and data scientists who have provided feedback and suggestions throughout the development of this project.
+- Data from WHO, European Environment Agency, Eurostat, etc.
+- Thanks to all who contributed to the project's conception and refinement.
 
 ## Future Developments
-- Updates with the latest data to keep the visualizations current and informative.
-- Enhancements to the user interface and user experience to facilitate easier data discovery and analysis.
-
-
-
+- Integrate updated datasets for relevancy and precision.
+- Improve UI/UX for streamlined navigation and interaction.
 
 
 
