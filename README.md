@@ -1,6 +1,6 @@
 # Final Year Project: European Data Exploration:
 
-WILL BE CHANGING NAME SOON
+#WILL BE CHANGING NAME SOON TO (Europe-Data-FYP)
 
 ## Overview
 My final year project presents an extensive, interactive investigation into various metrics of European life. Spanning health, environment, mortality, and trade, the visualizations on this website illuminate trends and provide a basis for informed discussions on public policy.
