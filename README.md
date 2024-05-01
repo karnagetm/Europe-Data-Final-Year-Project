@@ -31,6 +31,9 @@ git clone https://github.com/karnagetm/World-Data-FYP.git
 - Select an HTML file to explore the associated dataset.
 - Utilize Tableau's interactive elements for personalized insights.
 
+## Report
+- report is analysis of the project
+
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
 
