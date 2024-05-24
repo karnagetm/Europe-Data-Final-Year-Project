@@ -1,7 +1,5 @@
 # Europe-Data-Final-Year-Project
 
-# Final Year Project: European Data Exploration:
-
 ## Overview
 My final year project presents an extensive, interactive investigation into various metrics of European life. Spanning health, environment, mortality, and trade, the visualizations on this website illuminate trends and provide a basis for informed discussions on public policy.
 
