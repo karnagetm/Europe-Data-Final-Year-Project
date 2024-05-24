@@ -1,6 +1,6 @@
 # Final Year Project: European Data Exploration:
 
-# WILL BE CHANGING NAME SOON TO (Europe-Data-FYP)
+
 # FYP = Final Year Project
 
 ## Overview
