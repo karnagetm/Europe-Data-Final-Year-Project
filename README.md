@@ -31,6 +31,7 @@ git clone https://github.com/karnagetm/World-Data-FYP.git
 
 ## Report
 - report is analysis of the project
+- report is added
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
